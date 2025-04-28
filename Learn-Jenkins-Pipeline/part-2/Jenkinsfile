@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    triggers{
+        cron('H */4 * * 1-5')
+    }
+
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
+
+    environment {
+        versionBuild = '111'
+    }
+
+    stages{
+        stage('BUILD'){
+            when {
+                branch 'main'
+            }
+            steps {
+                echo env.versionBuild
+                sh 'java -version'
+            }
+        }
+    }
+}
