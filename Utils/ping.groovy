@@ -1,6 +1,6 @@
 node(label: 'builder'){
     
     stage('ping'){
-        echo "Hello, Jenkins!"
+        echo "Hello, Jenkins!";
     }
 }
