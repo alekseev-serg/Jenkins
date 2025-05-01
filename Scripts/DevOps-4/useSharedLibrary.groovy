@@ -6,10 +6,10 @@ pipeline {
     stages{
         stage('Test'){
             steps{
-                script(
+                script{
                     def notifier = notify();
                     notifier.info();
-                )
+                }
                 buildNpm();
 
             }
