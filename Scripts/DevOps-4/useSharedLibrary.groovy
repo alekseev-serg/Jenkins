@@ -7,7 +7,6 @@ pipeline {
         stage('Test'){
             steps{
                 buildNpm();
-
             }
         }
     }
