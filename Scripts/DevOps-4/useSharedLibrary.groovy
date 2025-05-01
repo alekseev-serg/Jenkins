@@ -5,7 +5,9 @@ pipeline {
 
     stages{
         stage('Test'){
-            buildNpm();
+            steps{
+                buildNpm();
+            }
         }
     }
 }
