@@ -3,12 +3,17 @@ node(label: 'builder'){
     cleanWs()
     checkout scm
 
+    properties([parameters([
+        string(name: 'APP_NAME', description: 'APP'),
+        string(name: 'ENVIRONMENT', description: 'DEV')
+    ])])
+
     fullCfg = readYaml file: 'General_CD/config.yml'
     cfg = [:]
 
     def configFound = false
     try {
-        cfg = fullCfg.apps[params.APP_NAME][ENVIRONMENT.to_LowerCase()]
+        cfg = fullCfg.apps[params.APP_NAME][ENVIRONMENT.toLowerCase()]
         configFound = true
     } catch(Exception e){
         echo "Config not found"
@@ -16,15 +21,10 @@ node(label: 'builder'){
 
     def appNames = []
     fullCfg.apps.each { k, v ->
-        if (v.contains(ENVIRONMENT.to_LowerCase())){
+        if (v.contains(ENVIRONMENT.toLowerCase())){
             appNames << k
         }
     }
-
-    properties([parameters([
-        string(name: 'APP_NAME', description: 'APP'),
-        string(name: 'ENVIRONMENT', description: 'DEV')
-    ])])
 
     stage('init'){
         println(ENVIRONMENT)
