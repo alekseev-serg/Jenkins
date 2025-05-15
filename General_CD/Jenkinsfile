@@ -23,7 +23,7 @@ node(label: 'builder'){
 
     properties([parameters([
         string(name: 'APP_NAME', description: 'APP'),
-        string(name: 'ENVIRONMENT', description: 'DEV'),
+        string(name: 'ENVIRONMENT', description: 'DEV')
     ])])
 
     stage('init'){
