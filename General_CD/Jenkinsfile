@@ -13,11 +13,12 @@ node(label: 'builder'){
         string(name: 'ENVIRONMENT', description: 'DEV')
     ])])
 
-
+    println('-------------------------------------------------------')
 
     def configFound = false
     try {
         cfg = fullCfg.apps[params.APP_NAME][ENVIRONMENT.toLowerCase()]
+        println(cfg)
         configFound = true
     } catch(Exception e){
         echo "Config not found"

@@ -1,6 +1,6 @@
 standDefaults:
   dev: &dev-default
-    vauil: 
+    vault: 
       namespace: vault_namespace
       url: https://some_vault_url.ru
       cred: approle
