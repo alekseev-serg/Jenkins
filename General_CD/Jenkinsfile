@@ -30,6 +30,7 @@ node(label: 'builder'){
             appNames << k
         }
     }
+    println(appNames)
 
     stage('init'){
         println(ENVIRONMENT)
