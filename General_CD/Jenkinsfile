@@ -3,13 +3,17 @@ node(label: 'builder'){
     cleanWs()
     checkout scm
 
+    def fullCfg = readYaml file: 'General_CD/config.yml'
+    println(fullCfg)
+    def cfg = [:]
+    println(cfg)
+
     properties([parameters([
         string(name: 'APP_NAME', description: 'app_name_one'),
         string(name: 'ENVIRONMENT', description: 'DEV')
     ])])
 
-    def fullCfg = readYaml file: 'General_CD/config.yml'
-    def cfg = [:]
+
 
     def configFound = false
     try {
