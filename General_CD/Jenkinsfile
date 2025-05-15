@@ -26,7 +26,7 @@ node(label: 'builder'){
 
     def appNames = []
     fullCfg.apps.each { k, v ->
-        if (v.keySet().any { it.equalsIgnoreCase(ENVIRONMENT) }) {
+        if (v.keySet().any { it.equalsIgnoreCase(params.ENVIRONMENT) }) {
             appNames << k
         }
     }
