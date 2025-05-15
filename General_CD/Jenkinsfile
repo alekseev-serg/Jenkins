@@ -8,8 +8,8 @@ node(label: 'builder'){
         string(name: 'ENVIRONMENT', description: 'DEV')
     ])])
 
-    fullCfg = readYaml file: 'General_CD/config.yml'
-    cfg = [:]
+    def fullCfg = readYaml file: 'General_CD/config.yml'
+    def cfg = [:]
 
     def configFound = false
     try {
@@ -19,12 +19,12 @@ node(label: 'builder'){
         echo "Config not found"
     }
 
-    def appNames = []
-    fullCfg.apps.each { k, v ->
-        if (v.contains(ENVIRONMENT.toLowerCase())){
-            appNames << k
-        }
-    }
+    // def appNames = []
+    // fullCfg.apps.each { k, v ->
+    //     if (v.contains(ENVIRONMENT.toLowerCase())){
+    //         appNames << k
+    //     }
+    // }
 
     stage('init'){
         println(ENVIRONMENT)
