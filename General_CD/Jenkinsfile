@@ -1,0 +1,36 @@
+node(label: 'builder'){
+    
+    cleanWs()
+    checkout scm
+
+    fullCfg = readYaml file: 'General_CD/config.yml'
+    cfg = [:]
+
+    def configFound = false
+    try {
+        cfg = fullCfg.apps[params.APP_NAME][ENVIRONMENT.to_LowerCase()]
+        configFound = true
+    } catch(Exception e){
+        echo "Config not found"
+    }
+
+    def appNames = []
+    fullCfg.apps.each { k, v ->
+        if (v.contains(ENVIRONMENT.to_LowerCase())){
+            appNames << k
+        }
+    }
+
+    properties([parameters([
+        string(name: 'APP_NAME', description: 'APP')
+        string(name: 'ENVIRONMENT', description: 'DEV')
+    ])])
+
+    stage('init'){
+        println(ENVIRONMENT)
+        println(cfg.k8s.namespace)
+        println(cfg.k8s.url)
+
+        currentBuild.displayName = "${env.BUILD_NUMBER} ${APP_NAME} ${cfg.k8s.namespace}"
+    }
+}

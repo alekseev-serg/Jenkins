@@ -1,0 +1,35 @@
+standDefaults:
+  dev: &dev-default
+    vauil: 
+      namespace: vault_namespace
+      url: https://some_vault_url.ru
+      cred: approle
+    registry:
+      host: docker.registry.ru
+      cred: docker_approle
+    bbHelm:
+      cred: bb_approle4
+      branch: develop
+  dev_stable: &dev-stable-default
+    <<: *dev-default
+
+apps:
+  app_name_one: &app_name_one
+    dev:
+      <<: *dev-default
+      productName: aaa
+      k8s:
+        url: https://some_dev_k8s_api_url.ru:6443
+        namespace: k8s_namespace
+        credPath: /a/b/c/d/
+    dev_stable:
+      <<: *dev-stable-default
+      productName: aaa
+      k8s:
+        url: https://some_dev_stable_k8s_api_url.ru:6443
+        namespace: k8s_namespace
+        credPath: /a/b/c/d/
+  app_name_two:
+    <<: *app_name_one
+  app_name_three:
+    <<: *app_name_one
