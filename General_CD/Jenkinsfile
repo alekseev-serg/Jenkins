@@ -24,12 +24,12 @@ node(label: 'builder'){
         echo "Config not found"
     }
 
-    // def appNames = []
-    // fullCfg.apps.each { k, v ->
-    //     if (v.contains(ENVIRONMENT.toLowerCase())){
-    //         appNames << k
-    //     }
-    // }
+    def appNames = []
+    fullCfg.apps.each { k, v ->
+        if (v.keySet().any { it.equalsIgnoreCase(ENVIRONMENT) }) {
+            appNames << k
+        }
+    }
 
     stage('init'){
         println(ENVIRONMENT)
